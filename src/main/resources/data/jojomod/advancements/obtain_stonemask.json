@@ -1,0 +1,33 @@
+{
+    "display": {
+        "title": {
+            "text": "Vampire!",
+            "color": "dark_red",
+            "bold": false
+        },
+        "description": {
+            "text": "You were expecting a Vampire, but it was me, DIO!",
+            "color": "gold"
+        },
+        "icon": {
+            "item": "jojomod:dio_picture"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+    "stone_mask": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "jojomod:stone_mask"
+          }
+        ]
+      }
+    }
+ }
+}

@@ -10,5 +10,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class JojoItem {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, JojoMod.MODID);
     public static final RegistryObject<Item> STONE_MASK = ITEMS.register("stone_mask", () -> new StoneMaskItem(new Item.Properties().group(JojoItemGroup.JOJO.get())));
+    public static final RegistryObject<Item> DIO = ITEMS.register("dio_picture", () -> new Item(new Item.Properties()));
 }
 
