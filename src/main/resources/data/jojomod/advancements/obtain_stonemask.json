@@ -1,7 +1,7 @@
 {
     "display": {
         "title": {
-            "text": "Vampire!",
+            "text": "Reject your Humanity",
             "color": "dark_red",
             "bold": false
         },
@@ -12,7 +12,7 @@
         "icon": {
             "item": "jojomod:dio_picture"
         },
-        "frame": "challenge",
+        "frame": "task",
         "show_toast": true,
         "announce_to_chat": true,
         "hidden": false,
