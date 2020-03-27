@@ -1,0 +1,31 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "jojomod:item/stone_mask",
+		"particle": "jojomod:item/stone_mask"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 3],
+			"to": [12, 8, 4],
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"east": {"uv": [0, 0, 1, 8], "texture": "#0"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 1, 8], "texture": "#0"},
+				"up": {"uv": [0, 0, 8, 1], "texture": "#0"},
+				"down": {"uv": [0, 0, 8, 1], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [67, 0, 0],
+			"translation": [-6, 1.75, 19.25]
+		},
+		"head": {
+			"translation": [0, 6.25, 0],
+			"scale": [1.6, 1.6, 1.6]
+		}
+	}
+}
