@@ -22,8 +22,15 @@ public class JojoMod {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         JojoItem.ITEMS.register(modEventBus);
         JojoBlock.BLOCKS.register(modEventBus);
-        modEventBus.addListener(JojoLootTable::onLootLoad);
+        modEventBus.addListener(this::onLootLoad);
         MinecraftForge.EVENT_BUS.register(this);
         instance = this;
+    }
+    //Only works in here somehow???
+    @SubscribeEvent
+    public void onLootLoad(LootTableLoadEvent event) {
+        if (event.getName().equals(new ResourceLocation("minecraft", "chests/desert_pyramid"))) {
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JojoMod.MODID,"inject/stone_mask_loot_table"))).build());
+        }
     }
 }
