@@ -11,6 +11,6 @@ public class ItemGroupJojo extends ItemGroup {
 
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(JojoItem.TEST_ITEM.get());
+        return new ItemStack(JojoItem.STONE_MASK.get());
     }
 }
