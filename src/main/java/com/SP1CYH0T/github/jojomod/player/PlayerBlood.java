@@ -55,11 +55,9 @@ public class PlayerBlood implements IPlayerBlood{
             if((this.blood + adjustment) > this.maxBlood) {
                 // return this.blood = this.blood + adjustment - maxBlood;
                 return this.blood = this.maxBlood;
-            } else {
-                return this.blood = this.blood + adjustment;
             }
         }
-        return 0;
+        return this.blood = this.blood + adjustment;
     }
 
     @Override
@@ -67,11 +65,9 @@ public class PlayerBlood implements IPlayerBlood{
         if(checkMax) {
             if((this.blood - decreasement) < 0) {
                 return 0;
-            } else {
-                return this.blood = this.blood - decreasement;
             }
         }
-        return 0;
+        return this.blood = this.blood - decreasement;
     }
 
 }

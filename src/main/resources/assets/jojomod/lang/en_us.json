@@ -1,4 +1,6 @@
 {
   "item.jojomod.stone_mask": "Stone Mask",
-  "stone_mask.break": "Your Stone Mask broke!"
+  "stone_mask.break": "Your Stone Mask broke!",
+  "vampire.blood_increase": "Blood Increased by %BLOOD_ADJUSTMENT%",
+  "vampire.blood_decrease": "Blood Decreased by %BLOOD_DECREASEMENT%"
 }

@@ -5,6 +5,8 @@ import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
 import com.SP1CYH0T.github.jojomod.utility.JojoUtility;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -26,6 +28,11 @@ public class JojoStoneMaskEnemyHitEvent {
                     if(playerBloodLazyOptional.isPresent()) {
                         IPlayerBlood playerBlood = playerBloodLazyOptional.orElse(null);
                         if (!JojoUtility.isVampire(playerBlood)) {
+                            player.addPotionEffect(new EffectInstance(Effects.GLOWING, 1125));
+                            player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 1290));
+                            player.addPotionEffect(new EffectInstance(Effects.HUNGER, 1150));
+                            player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 1820, 5));
+                            player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 355));
                             playerBlood.adjustMaxBlood(10f);
                             playerBlood.adjustBlood(playerBlood.getBlood() + 0.5f, true);
                             player.sendStatusMessage(new TextComponent() {
