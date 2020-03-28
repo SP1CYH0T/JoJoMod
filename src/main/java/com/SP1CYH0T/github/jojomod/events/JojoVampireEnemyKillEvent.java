@@ -24,15 +24,16 @@ public class JojoVampireEnemyKillEvent {
             IPlayerBlood playerBlood = playerBloodLazyOptional.orElse(null);
             if(JojoUtility.isVampire(playerBlood)) {
                 Random random = new Random();
-                float bloodAdjustment = random.nextFloat() * 0.001f;
+                float bloodAdjustment = random.nextFloat();
                 playerBlood.adjustBlood(bloodAdjustment, true);
-                playerBlood.adjustMaxBlood(random.nextFloat() * 0.00001f);
+                playerBlood.adjustMaxBlood(random.nextFloat() * 0.001f);
                 player.setHealth(player.getHealth() + playerBlood.getBlood());
-                player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth() + playerBlood.getBlood());
+                player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth() + playerBlood.getBlood() / 1000);
+                System.out.println(playerBlood.getBlood());
                 player.sendStatusMessage(new TextComponent() {
                     @Override
                     public String getUnformattedComponentText() {
-                        return new TranslationTextComponent("vampire.blood_increase").getFormattedText().replaceAll("%BLOOD_ADJUSTMENT%", String.format("%.02f", bloodAdjustment));
+                        return new TranslationTextComponent("vampire.blood_increase").getFormattedText().replaceAll("%BLOOD_ADJUSTMENT%", String.format("%.03f", bloodAdjustment));
                     }
 
                     @Override

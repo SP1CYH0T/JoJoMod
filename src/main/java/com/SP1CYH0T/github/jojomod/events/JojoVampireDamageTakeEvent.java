@@ -23,12 +23,11 @@ public class JojoVampireDamageTakeEvent {
                 Random random = new Random();
                 float bloodDecreasement = random.nextFloat();
                 playerBlood.decreaseBlood(bloodDecreasement,true);
-                player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth() + playerBlood.getBlood());
-                System.out.println(playerBlood.getBlood());
+                player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth() + playerBlood.getBlood() / 1000);
                 player.sendStatusMessage(new TextComponent() {
                     @Override
                     public String getUnformattedComponentText() {
-                        return new TranslationTextComponent("vampire.blood_decrease").getFormattedText().replaceAll("%BLOOD_DECREASEMENT%", String.format("%.02f", bloodDecreasement));
+                        return new TranslationTextComponent("vampire.blood_decrease").getFormattedText().replaceAll("%BLOOD_DECREASEMENT%", String.format("%.03f", bloodDecreasement));
                     }
 
                     @Override

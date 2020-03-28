@@ -17,7 +17,6 @@ public class PlayerBloodCapability implements ICapabilitySerializable<CompoundNB
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        System.out.println();
         return cap == JojoCapability.PLAYER_BLOOD ? playerBlood.cast() : LazyOptional.empty();
     }
 
