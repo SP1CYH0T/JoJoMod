@@ -13,7 +13,7 @@ public class JojoLootTable {
     @SubscribeEvent
     public static void onLootLoad(LootTableLoadEvent event) {
         if(event.getName().toString().equals("minecraft:chests/desert_pyramid")) {
-            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JojoMod.MODID,"inject/stone_mask_loot_table"))).build());
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation("inject/stone_mask_loot_table"))).build());
         }
     }
 
