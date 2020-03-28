@@ -25,6 +25,7 @@ public class JojoStoneMaskEnemyHitEvent {
                     LazyOptional<IPlayerBlood> playerBloodLazyOptional = player.getCapability(JojoCapability.PLAYER_BLOOD);
                     if(playerBloodLazyOptional.isPresent()) {
                         IPlayerBlood playerBlood = playerBloodLazyOptional.orElse(null);
+                        System.out.println(JojoUtility.isVampire(playerBlood));
                         if (!JojoUtility.isVampire(playerBlood)) {
                             playerBlood.adjustMaxBlood(10f);
                             playerBlood.setBlood(playerBlood.getBlood() + 1f);

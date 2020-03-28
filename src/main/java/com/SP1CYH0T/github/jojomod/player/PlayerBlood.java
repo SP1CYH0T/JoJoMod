@@ -3,7 +3,7 @@ package com.SP1CYH0T.github.jojomod.player;
 public class PlayerBlood implements IPlayerBlood{
 
     public float blood = 0.0f;
-    public float maxBlood = 10.0f;
+    public float maxBlood = 0.0f;
     public PlayerBlood() {
     }
     @Override
