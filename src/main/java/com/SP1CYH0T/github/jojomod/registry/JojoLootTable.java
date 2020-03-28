@@ -8,6 +8,13 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+@Mod.EventBusSubscriber(modid = JojoMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JojoLootTable {
+    @SubscribeEvent
+    public static void onLootLoad(LootTableLoadEvent event) {
+        if(event.getName().toString().equals("minecraft:chests/desert_pyramid")) {
+            event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(JojoMod.MODID,"inject/stone_mask_loot_table"))).build());
+        }
+    }
 
 }
