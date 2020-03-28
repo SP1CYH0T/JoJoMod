@@ -12,4 +12,8 @@ public interface IPlayerBlood {
 
     float decreaseMaxBlood(float decreasement);
     float decreaseBlood(float decreasement);
+
+    float adjustBlood(float adjustment, boolean checkMax);
+
+    float decreaseBlood(float decreasement, boolean checkMax);
 }

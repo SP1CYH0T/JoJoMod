@@ -28,23 +28,50 @@ public class PlayerBlood implements IPlayerBlood{
 
     @Override
     public float adjustMaxBlood(float adjustment) {
-        return this.maxBlood + adjustment;
+        return this.maxBlood = this.maxBlood + adjustment;
     }
 
     @Override
     public float adjustBlood(float adjustment) {
-        return this.blood + adjustment;
+        return this.adjustBlood(adjustment, false);
     }
 
     //Might also just do adjustMaxBlood(-int)
     @Override
     public float decreaseMaxBlood(float decreasement) {
-        return this.maxBlood -= decreasement;
+        return this.maxBlood = this.maxBlood - decreasement;
     }
 
     //Might also just do adjustBlood(-int)
     @Override
     public float decreaseBlood(float decreasement) {
-        return this.blood -= decreasement;
+       return this.decreaseBlood(decreasement, false);
     }
+
+
+    @Override
+    public float adjustBlood(float adjustment, boolean checkMax) {
+        if(checkMax) {
+            if((this.blood + adjustment) > this.maxBlood) {
+                // return this.blood = this.blood + adjustment - maxBlood;
+                return this.blood = this.maxBlood;
+            } else {
+                return this.blood = this.blood + adjustment;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public float decreaseBlood(float decreasement, boolean checkMax) {
+        if(checkMax) {
+            if((this.blood - decreasement) < 0) {
+                return 0;
+            } else {
+                return this.blood = this.blood - decreasement;
+            }
+        }
+        return 0;
+    }
+
 }
