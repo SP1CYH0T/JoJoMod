@@ -18,27 +18,28 @@ public class JojoStoneMaskEnemyHitEvent {
         //Only call when the Source is a PlayerEntity
         public static void onEvent(LivingAttackEvent event) {
                 //JojoEvents is making sure the Source is a PlayerEntity
-                PlayerEntity  player = (PlayerEntity) event.getSource().getTrueSource();
+                PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
                 if(JojoUtility.isWearingStoneMask(player)) {
-
                     JojoUtility.getHelmet(player).shrink(1);
                     player.sendMessage(new TranslationTextComponent("stone_mask.break"));
-                    LazyOptional<IPlayerBlood> playerBlood = player.getCapability(JojoCapability.PLAYER_BLOOD);
-                    if(playerBlood.isPresent()) {
-                        IPlayerBlood blood = playerBlood.orElse(null);
-                        blood.setMaxBlood(10f);
-                        blood.setBlood(blood.getBlood() + 1f);
-                        player.sendStatusMessage(new TextComponent() {
-                            @Override
-                            public String getUnformattedComponentText() {
-                                return blood.getBlood() + "/" + blood.getMaxBlood();
-                            }
+                    LazyOptional<IPlayerBlood> playerBloodLazyOptional = player.getCapability(JojoCapability.PLAYER_BLOOD);
+                    if(playerBloodLazyOptional.isPresent()) {
+                        IPlayerBlood playerBlood = playerBloodLazyOptional.orElse(null);
+                        if (!JojoUtility.isVampire(playerBlood)) {
+                            playerBlood.adjustMaxBlood(10f);
+                            playerBlood.setBlood(playerBlood.getBlood() + 1f);
+                            player.sendStatusMessage(new TextComponent() {
+                                @Override
+                                public String getUnformattedComponentText() {
+                                    return playerBlood.getBlood() + "/" + playerBlood.getMaxBlood();
+                                }
 
-                            @Override
-                            public ITextComponent shallowCopy() {
-                                return this;
-                            }
-                        }, true);
+                                @Override
+                                public ITextComponent shallowCopy() {
+                                    return this;
+                                }
+                            }, true);
+                        }
                     }
                 }
         }

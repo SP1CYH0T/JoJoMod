@@ -6,4 +6,10 @@ public interface IPlayerBlood {
 
     float setBlood(float blood);
     float setMaxBlood(float maxBlood);
+
+    float adjustMaxBlood(float adjustment);
+    float adjustBlood(float adjustment);
+
+    float decreaseMaxBlood(float decreasement);
+    float decreaseBlood(float decreasement);
 }
