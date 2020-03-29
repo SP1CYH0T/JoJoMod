@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 public class JojoLootTable {
     @SubscribeEvent
     public static void onLootLoad(LootTableLoadEvent event) {
-        if(event.getName().toString().equals("minecraft:chests/desert_pyramid")) {
+        if(event.getName().toString().equals("minecraft:chests/jungle_pyramid")) {
             event.getTable().addPool(LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation("inject/stone_mask_loot_table"))).build());
         }
     }

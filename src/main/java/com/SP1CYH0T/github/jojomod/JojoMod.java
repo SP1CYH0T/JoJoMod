@@ -6,6 +6,7 @@ import com.SP1CYH0T.github.jojomod.player.PlayerBloodStorage;
 import com.SP1CYH0T.github.jojomod.registry.JojoBlock;
 import com.SP1CYH0T.github.jojomod.registry.JojoItem;
 import com.SP1CYH0T.github.jojomod.registry.JojoLootTable;
+import com.SP1CYH0T.github.jojomod.registry.JojoSoundEvents;
 import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
 import com.SP1CYH0T.github.jojomod.utility.JojoEvent;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +30,7 @@ public class JojoMod {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         JojoItem.ITEMS.register(modEventBus);
         JojoBlock.BLOCKS.register(modEventBus);
+        JojoSoundEvents.SOUNDS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(JojoLootTable.class);
         MinecraftForge.EVENT_BUS.register(JojoEvent.class);
        // modEventBus.addListener(JojoEvent.);

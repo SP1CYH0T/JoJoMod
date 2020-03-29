@@ -2,7 +2,9 @@ package com.SP1CYH0T.github.jojomod.registry;
 
 import com.SP1CYH0T.github.jojomod.JojoMod;
 import com.SP1CYH0T.github.jojomod.objects.items.StoneMaskItem;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.item.Item;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

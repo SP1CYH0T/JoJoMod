@@ -1,6 +1,7 @@
 package com.SP1CYH0T.github.jojomod.events;
 
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
+import com.SP1CYH0T.github.jojomod.registry.JojoSoundEvents;
 import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
 import com.SP1CYH0T.github.jojomod.utility.JojoUtility;
 import net.minecraft.entity.Entity;
@@ -28,6 +29,7 @@ public class JojoStoneMaskEnemyHitEvent {
                     if(playerBloodLazyOptional.isPresent()) {
                         IPlayerBlood playerBlood = playerBloodLazyOptional.orElse(null);
                         if (!JojoUtility.isVampire(playerBlood)) {
+                            //player.playSound();
                             player.addPotionEffect(new EffectInstance(Effects.GLOWING, 1125));
                             player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 1290));
                             player.addPotionEffect(new EffectInstance(Effects.HUNGER, 1150));
