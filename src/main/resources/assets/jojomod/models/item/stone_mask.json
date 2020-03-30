@@ -23,9 +23,28 @@
 			"rotation": [67, 0, 0],
 			"translation": [-6, 1.75, 19.25]
 		},
+		"thirdperson_lefthand": {
+			"rotation": [-4, 0, 0],
+			"translation": [-1, 1.75, 4.75]
+		},
+		"firstperson_righthand": {
+			"translation": [6, 3.75, 0]
+		},
+		"firstperson_lefthand": {
+			"translation": [4.25, 2.75, 0]
+		},
+		"ground": {
+			"translation": [0, 2, 0]
+		},
+		"gui": {
+			"translation": [0, 4, 0]
+		},
 		"head": {
 			"translation": [0, 6.25, 0],
 			"scale": [1.6, 1.6, 1.6]
+		},
+		"fixed": {
+			"translation": [-2, 5.5, 0]
 		}
 	}
 }
