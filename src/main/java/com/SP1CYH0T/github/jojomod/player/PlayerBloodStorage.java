@@ -5,6 +5,7 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
+
 import javax.annotation.Nullable;
 
 public class PlayerBloodStorage implements Capability.IStorage<IPlayerBlood> {
@@ -23,5 +24,8 @@ public class PlayerBloodStorage implements Capability.IStorage<IPlayerBlood> {
         CompoundNBT nbt1 = (CompoundNBT) nbt;
         instance.setBlood(nbt1.getFloat("storedBlood"));
         instance.setMaxBlood(nbt1.getFloat("maxBlood"));
+    }
+
+    public void sync() {
     }
 }
