@@ -31,21 +31,11 @@ public class JojoStoneMaskEnemyHitEvent {
                             player.addPotionEffect(new EffectInstance(Effects.GLOWING, 1125));
                             player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 1290));
                             player.addPotionEffect(new EffectInstance(Effects.HUNGER, 1150));
-                            player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 1820, 5));
+                            //player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 1820, 5));
                             player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 355));
                             playerBlood.adjustMaxBlood(1000f);
                             playerBlood.adjustBlood(125f, true);
-                            player.sendStatusMessage(new TextComponent() {
-                                @Override
-                                public String getUnformattedComponentText() {
-                                    return playerBlood.getBlood() + "/" + playerBlood.getMaxBlood();
-                                }
-
-                                @Override
-                                public ITextComponent shallowCopy() {
-                                    return this;
-                                }
-                            }, true);
+                            JojoUtility.setBloodHearts(player, playerBlood);
                         }
                     }
                 }

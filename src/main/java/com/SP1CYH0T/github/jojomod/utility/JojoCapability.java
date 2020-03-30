@@ -21,8 +21,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 
 public class JojoCapability {
+
     @CapabilityInject(IPlayerBlood.class)
     public static Capability<IPlayerBlood> PLAYER_BLOOD = null;
+
     @CapabilityInject(IEntityBlood.class)
     public static Capability<IEntityBlood> ENTITY_BLOOD = null;
 
