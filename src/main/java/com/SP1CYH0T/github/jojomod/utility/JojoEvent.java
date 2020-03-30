@@ -4,6 +4,7 @@ import com.SP1CYH0T.github.jojomod.JojoMod;
 import com.SP1CYH0T.github.jojomod.events.JojoStoneMaskEnemyHitEvent;
 import com.SP1CYH0T.github.jojomod.events.JojoVampireDamageTakeEvent;
 import com.SP1CYH0T.github.jojomod.events.JojoVampireEnemyKillEvent;
+import com.SP1CYH0T.github.jojomod.events.JojoVampireInSunEvent;
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -13,12 +14,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -45,6 +48,15 @@ public class JojoEvent {
             JojoVampireEnemyKillEvent.onEvent(event);
         }
     }
+    @SubscribeEvent
+    public static void LivingUpdateEvent(LivingEvent.LivingUpdateEvent event){
+        Entity entity = event.getEntity();
+        World world = entity.getEntityWorld();
+        if(entity instanceof  PlayerEntity){
+            JojoVampireInSunEvent.onTick(entity, world);
+        }
+    }
+
     @SubscribeEvent
     public static void PlayerCloneEvent(PlayerEvent.Clone event) {
         PlayerEntity playerEntity = event.getPlayer();
