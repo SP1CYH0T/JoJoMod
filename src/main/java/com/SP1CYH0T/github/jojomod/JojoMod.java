@@ -48,12 +48,7 @@ public class JojoMod {
 
     @SubscribeEvent
     public void onCommonSetup(FMLCommonSetupEvent e) {
-        JojoPacket.CHANNEL = NetworkRegistry.newSimpleChannel(
-                new ResourceLocation(JojoMod.MODID, "main"),
-                () -> JojoPacket.PROTOCOL_VERSION,
-                JojoPacket.PROTOCOL_VERSION::equals,
-                JojoPacket.PROTOCOL_VERSION::equals
-        );
+        JojoPacket.CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation(JojoMod.MODID, "main"), () -> JojoPacket.PROTOCOL_VERSION, JojoPacket.PROTOCOL_VERSION::equals, JojoPacket.PROTOCOL_VERSION::equals);
         JojoPacket.CHANNEL.registerMessage(0, PlayerBloodPacket.BloodPacket.class, PlayerBloodPacket.BloodPacket::encode, PlayerBloodPacket.BloodPacket::decode, PlayerBloodPacket.BloodPacket::handle);
     }
 }

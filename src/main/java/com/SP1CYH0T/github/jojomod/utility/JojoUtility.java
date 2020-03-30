@@ -40,7 +40,11 @@ public class JojoUtility {
     }
 
     public static void setBloodHearts(PlayerEntity player, IPlayerBlood playerBlood) {
-        player.setHealth(player.getHealth() + playerBlood.getBlood());
-        player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth() + playerBlood.getBlood() * 0.0001f);
+        if(isVampire(playerBlood)) {
+            player.setHealth(player.getHealth() + playerBlood.getBlood());
+            player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5 + (playerBlood.getBlood() * 0.01f));
+        } else {
+            player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20);
+        }
     }
 }

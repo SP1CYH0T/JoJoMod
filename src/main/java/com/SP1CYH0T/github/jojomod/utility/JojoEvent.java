@@ -11,6 +11,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -21,6 +22,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class JojoEvent {
     @SubscribeEvent
@@ -51,6 +53,16 @@ public class JojoEvent {
         }
     }
 
+    @SubscribeEvent
+    public static void PlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
+        PlayerEntity player = event.getPlayer();
+        LazyOptional<IPlayerBlood> playerBloodLazyOptional = player.getCapability(JojoCapability.PLAYER_BLOOD);
+        if(playerBloodLazyOptional.isPresent()) {
+            IPlayerBlood playerBlood = playerBloodLazyOptional.orElseThrow(IllegalStateException::new);
+            JojoPacket.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), JojoUtility.bloodPacketMessage(playerBlood));
+        }
+    }
+
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void RenderGameOverlayEvent(RenderGameOverlayEvent.Post event) {
@@ -64,7 +76,7 @@ public class JojoEvent {
         if(playerBloodLazyOptional.isPresent()) {
             IPlayerBlood playerBlood = playerBloodLazyOptional.orElseThrow(IllegalStateException::new);
            if(JojoUtility.isVampire(playerBlood)) {
-               fRender.drawString(ChatFormatting.RED + "Blood: " + playerBlood.getBlood() + " / " + playerBlood.getMaxBlood(), 5, 5, 0);
+               fRender.drawString(ChatFormatting.RED + "Blood: " + String.format("%.02f", playerBlood.getBlood()) + "bu / " + String.format("%.02f", playerBlood.getMaxBlood()) + "bu", 5, 5, 0);
                minecraft.getTextureManager().bindTexture(new ResourceLocation(JojoMod.MODID,"textures/gui/blood_progress_bar.png"));
                minecraft.ingameGUI.blit(5,15,0,7,49,7);
                minecraft.getTextureManager().bindTexture(new ResourceLocation(JojoMod.MODID,"textures/gui/blood_progress_bar_1.png"));

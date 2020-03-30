@@ -2,26 +2,23 @@ package com.SP1CYH0T.github.jojomod.events;
 
 
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
-import com.SP1CYH0T.github.jojomod.player.PlayerBloodPacket;
 import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
 import com.SP1CYH0T.github.jojomod.utility.JojoPacket;
 import com.SP1CYH0T.github.jojomod.utility.JojoUtility;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.SharedMonsterAttributes;
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.STitlePacket;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponent;
+import net.minecraft.util.text.TextComponentUtils;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.fml.network.FMLNetworkConstants;
-import net.minecraftforge.fml.network.FMLPlayMessages;
-import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.PacketDistributor;
+import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
-import java.util.function.Supplier;
 
 public class JojoVampireEnemyKillEvent {
     //Only call when it's sure that Source is a PlayerEntity
@@ -34,10 +31,23 @@ public class JojoVampireEnemyKillEvent {
             if(JojoUtility.isVampire(playerBlood)) {
                 Random random = new Random();
                 float bloodAdjustment = random.nextFloat();
+                float maxBloodAdjustment = random.nextFloat() * 0.001f;
                 playerBlood.adjustBlood(bloodAdjustment, true);
-                playerBlood.adjustMaxBlood(random.nextFloat() * 0.001f);
+                playerBlood.adjustMaxBlood(maxBloodAdjustment);
                 JojoUtility.setBloodHearts(player, playerBlood);
-                JojoPacket.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), JojoUtility.bloodPacketMessage(playerBlood));
+                ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
+                JojoPacket.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayerEntity), JojoUtility.bloodPacketMessage(playerBlood));
+                /*serverPlayerEntity.connection.sendPacket(new STitlePacket(STitlePacket.Type.TITLE, new TextComponent() {
+                        @Override
+                        public String getUnformattedComponentText() {
+                            return new TranslationTextComponent("vampire.max_blood_increase").getFormattedText().replaceAll("%MAX_BLOOD_ADJUSTMENT%", String.format("%.06f", maxBloodAdjustment));
+                        }
+                        @Override
+                        public ITextComponent shallowCopy() {
+                            return this;
+                        }
+                    }));
+                 */
                 player.sendStatusMessage(new TextComponent() {
                     @Override
                     public String getUnformattedComponentText() {
