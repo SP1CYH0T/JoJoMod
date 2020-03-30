@@ -2,6 +2,8 @@ package com.SP1CYH0T.github.jojomod.utility;
 
 import com.SP1CYH0T.github.jojomod.objects.items.StoneMaskItem;
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
+import com.SP1CYH0T.github.jojomod.player.PlayerBloodPacket;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
@@ -30,5 +32,15 @@ public class JojoUtility {
     //Get Armor Slot Boots
     public static ItemStack getBoots(PlayerEntity playerEntity) {
         return playerEntity.inventory.armorInventory.get(0);
+    }
+
+    public static PlayerBloodPacket.BloodPacket bloodPacketMessage(IPlayerBlood playerBlood) {
+        PlayerBloodPacket.BloodPacket msg = new PlayerBloodPacket.BloodPacket(playerBlood.getBlood(), playerBlood.getMaxBlood());
+        return msg;
+    }
+
+    public static void setBloodHearts(PlayerEntity player, IPlayerBlood playerBlood) {
+        player.setHealth(player.getHealth() + playerBlood.getBlood());
+        player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth() + playerBlood.getBlood() * 0.0001f);
     }
 }

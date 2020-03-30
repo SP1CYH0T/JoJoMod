@@ -2,6 +2,7 @@ package com.SP1CYH0T.github.jojomod;
 
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
 import com.SP1CYH0T.github.jojomod.player.PlayerBlood;
+import com.SP1CYH0T.github.jojomod.player.PlayerBloodPacket;
 import com.SP1CYH0T.github.jojomod.player.PlayerBloodStorage;
 import com.SP1CYH0T.github.jojomod.registry.JojoBlock;
 import com.SP1CYH0T.github.jojomod.registry.JojoItem;
@@ -9,6 +10,8 @@ import com.SP1CYH0T.github.jojomod.registry.JojoLootTable;
 import com.SP1CYH0T.github.jojomod.registry.JojoSoundEvents;
 import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
 import com.SP1CYH0T.github.jojomod.utility.JojoEvent;
+import com.SP1CYH0T.github.jojomod.utility.JojoPacket;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
@@ -20,6 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.NetworkRegistry;
 
 @Mod(JojoMod.MODID)
 public class JojoMod {
@@ -36,13 +40,20 @@ public class JojoMod {
        // modEventBus.addListener(JojoEvent.);
         MinecraftForge.EVENT_BUS.register(JojoCapability.class);
         modEventBus.addListener(this::onCommonSetup);
+        modEventBus.addListener(JojoCapability::CapabilityRegistry);
         MinecraftForge.EVENT_BUS.register(this);
-
         modEventBus.addListener(JojoLootTable::onLootLoad);
         instance = this;
     }
+
     @SubscribeEvent
     public void onCommonSetup(FMLCommonSetupEvent e) {
-        CapabilityManager.INSTANCE.register(IPlayerBlood.class, new PlayerBloodStorage(), PlayerBlood::new);
+        JojoPacket.CHANNEL = NetworkRegistry.newSimpleChannel(
+                new ResourceLocation(JojoMod.MODID, "main"),
+                () -> JojoPacket.PROTOCOL_VERSION,
+                JojoPacket.PROTOCOL_VERSION::equals,
+                JojoPacket.PROTOCOL_VERSION::equals
+        );
+        JojoPacket.CHANNEL.registerMessage(0, PlayerBloodPacket.BloodPacket.class, PlayerBloodPacket.BloodPacket::encode, PlayerBloodPacket.BloodPacket::decode, PlayerBloodPacket.BloodPacket::handle);
     }
 }

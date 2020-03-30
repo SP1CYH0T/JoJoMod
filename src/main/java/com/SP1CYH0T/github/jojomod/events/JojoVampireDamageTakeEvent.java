@@ -18,12 +18,12 @@ public class JojoVampireDamageTakeEvent {
         PlayerEntity player = (PlayerEntity) event.getEntity();
         LazyOptional<IPlayerBlood> playerBloodLazyOptional = player.getCapability(JojoCapability.PLAYER_BLOOD);
         if(playerBloodLazyOptional.isPresent()) {
-            IPlayerBlood playerBlood = playerBloodLazyOptional.orElse(null);
+            IPlayerBlood playerBlood = playerBloodLazyOptional.orElseThrow(RuntimeException::new);
             if(JojoUtility.isVampire(playerBlood)) {
                 Random random = new Random();
                 float bloodDecreasement = random.nextFloat();
                 playerBlood.decreaseBlood(bloodDecreasement,true);
-                player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth() + playerBlood.getBlood() / 1000);
+                JojoUtility.setBloodHearts(player, playerBlood);
                 player.sendStatusMessage(new TextComponent() {
                     @Override
                     public String getUnformattedComponentText() {

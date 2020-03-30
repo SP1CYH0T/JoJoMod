@@ -47,9 +47,10 @@ public class JojoEvent {
     public static void PlayerCloneEvent(PlayerEvent.Clone event) {
         PlayerEntity playerEntity = event.getPlayer();
         PlayerEntity original = event.getOriginal();
-        if(event.isWasDeath()) {
+        if (event.isWasDeath()) {
         }
     }
+
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void RenderGameOverlayEvent(RenderGameOverlayEvent.Post event) {
@@ -61,10 +62,8 @@ public class JojoEvent {
         PlayerEntity player = minecraft.player;
         LazyOptional<IPlayerBlood> playerBloodLazyOptional = player.getCapability(JojoCapability.PLAYER_BLOOD);
         if(playerBloodLazyOptional.isPresent()) {
-            //Keeps resetting to 0
             IPlayerBlood playerBlood = playerBloodLazyOptional.orElseThrow(IllegalStateException::new);
            if(JojoUtility.isVampire(playerBlood)) {
-               System.out.println(playerBlood.getBlood());
                fRender.drawString(ChatFormatting.RED + "Blood: " + playerBlood.getBlood() + " / " + playerBlood.getMaxBlood(), 5, 5, 0);
                minecraft.getTextureManager().bindTexture(new ResourceLocation(JojoMod.MODID,"textures/gui/blood_progress_bar.png"));
                minecraft.ingameGUI.blit(5,15,0,7,49,7);
