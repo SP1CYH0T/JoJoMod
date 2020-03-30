@@ -38,8 +38,8 @@ public class JojoMod {
        // modEventBus.addListener(JojoEvent.);
         MinecraftForge.EVENT_BUS.register(JojoCapability.class);
         modEventBus.addListener(this::onCommonSetup);
+        modEventBus.addListener(JojoCapability::CapabilityRegistry);
         MinecraftForge.EVENT_BUS.register(this);
-
         modEventBus.addListener(JojoLootTable::onLootLoad);
         instance = this;
     }

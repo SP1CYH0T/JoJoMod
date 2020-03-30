@@ -28,15 +28,17 @@ public class JojoCapability {
 
 
     @SubscribeEvent
+    public static void CapabilityRegistry(FMLCommonSetupEvent e) {
+        CapabilityManager.INSTANCE.register(IPlayerBlood.class, new PlayerBloodStorage(), PlayerBlood::new);
+        CapabilityManager.INSTANCE.register(IEntityBlood.class, new EntityBloodStorage(), EntityBlood::new);
+    }
+
+    @SubscribeEvent
     public static void AttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof PlayerEntity) {
             event.addCapability(new ResourceLocation(JojoMod.MODID, "playerblood"), new PlayerBloodCapability());
         }
-        event.addCapability(new ResourceLocation(JojoMod.MODID, "entityblood"), new EntityBloodProvider());
+       //event.addCapability(new ResourceLocation(JojoMod.MODID, "entityblood"), new EntityBloodProvider());
     }
-    @SubscribeEvent
-    public void CapabilityRegistry(FMLCommonSetupEvent e) {
-        CapabilityManager.INSTANCE.register(IPlayerBlood.class, new PlayerBloodStorage(), PlayerBlood::new);
-        CapabilityManager.INSTANCE.register(IEntityBlood.class, new EntityBloodStorage(), EntityBlood::new);
-    }
+
 }
