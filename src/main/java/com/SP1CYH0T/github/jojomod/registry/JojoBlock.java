@@ -17,6 +17,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.Objects;
 @Mod.EventBusSubscriber(modid = JojoMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JojoBlock {
+
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, JojoMod.MODID);
     public static final RegistryObject<Block> TEST_BLOCK = BLOCKS.register("test_block", () -> new Block(Block.Properties.create(Material.ROCK)));
 

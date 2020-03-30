@@ -1,0 +1,12 @@
+{
+ "stone_mask_activate": {
+    "category": "master",
+    "subtitle": "sound.jojomod.stone_mask_activate",
+    "sounds": [
+      {
+        "name": "jojomod:stone_mask_activate",
+        "stream": false
+      }
+    ]
+  }
+}

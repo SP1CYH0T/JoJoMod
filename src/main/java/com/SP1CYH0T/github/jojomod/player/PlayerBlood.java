@@ -1,5 +1,15 @@
 package com.SP1CYH0T.github.jojomod.player;
 
+import com.SP1CYH0T.github.jojomod.network.JojoNetwork;
+import com.SP1CYH0T.github.jojomod.network.packet.PlayerBloodPacket;
+import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.common.util.LazyOptional;
+
+import javax.annotation.Nonnull;
+
 public class PlayerBlood implements IPlayerBlood{
 
     public float blood = 0.0f;
@@ -70,4 +80,29 @@ public class PlayerBlood implements IPlayerBlood{
         return this.blood = this.blood - decreasement;
     }
 
+    @Override
+    public void sync(PlayerEntity entity) {
+        IPlayerBlood data = get(entity).orElse(null);
+        JojoNetwork.sendPacketToAll(new PlayerBloodPacket(entity.getUniqueID(), data.serializeNBT()));
+    }
+
+    @Nonnull
+    public static LazyOptional<IPlayerBlood> get(Entity player) {
+        return player.getCapability(JojoCapability.PLAYER_BLOOD, null);
+    }
+
+    @Override
+    public CompoundNBT serializeNBT() {
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putFloat("storedBlood", getBlood());
+        nbt.putFloat("maxBlood", getMaxBlood());
+        return nbt;
+    }
+
+
+    @Override
+    public void deserializeNBT(CompoundNBT nbt) {
+        setBlood(nbt.getFloat("storedBlood"));
+        setMaxBlood(nbt.getFloat("maxBlood"));
+    }
 }

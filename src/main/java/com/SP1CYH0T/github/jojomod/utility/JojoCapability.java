@@ -2,7 +2,6 @@ package com.SP1CYH0T.github.jojomod.utility;
 
 import com.SP1CYH0T.github.jojomod.JojoMod;
 import com.SP1CYH0T.github.jojomod.entity.EntityBlood;
-import com.SP1CYH0T.github.jojomod.entity.EntityBloodProvider;
 import com.SP1CYH0T.github.jojomod.entity.EntityBloodStorage;
 import com.SP1CYH0T.github.jojomod.entity.IEntityBlood;
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
@@ -10,6 +9,7 @@ import com.SP1CYH0T.github.jojomod.player.PlayerBlood;
 import com.SP1CYH0T.github.jojomod.player.PlayerBloodCapability;
 import com.SP1CYH0T.github.jojomod.player.PlayerBloodStorage;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -40,7 +40,10 @@ public class JojoCapability {
         if (event.getObject() instanceof PlayerEntity) {
             event.addCapability(new ResourceLocation(JojoMod.MODID, "playerblood"), new PlayerBloodCapability());
         }
-       //event.addCapability(new ResourceLocation(JojoMod.MODID, "entityblood"), new EntityBloodProvider());
+
+        if (event.getObject() instanceof LivingEntity) {
+            //event.addCapability(new ResourceLocation(JojoMod.MODID, "entityblood"), new EntityBloodProvider());
+        }
     }
 
 }
