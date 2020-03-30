@@ -30,17 +30,14 @@ public class JojoVampireEnemyKillEvent {
         PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
         LazyOptional<IPlayerBlood> playerBloodLazyOptional = player.getCapability(JojoCapability.PLAYER_BLOOD);
         if(playerBloodLazyOptional.isPresent()) {
-            IPlayerBlood playerBlood = playerBloodLazyOptional.orElse(null);
+            IPlayerBlood playerBlood = playerBloodLazyOptional.orElseThrow(RuntimeException::new);
             if(JojoUtility.isVampire(playerBlood)) {
                 Random random = new Random();
                 float bloodAdjustment = random.nextFloat();
                 playerBlood.adjustBlood(bloodAdjustment, true);
                 playerBlood.adjustMaxBlood(random.nextFloat() * 0.001f);
-                player.setHealth(player.getHealth() + playerBlood.getBlood());
-                player.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(player.getMaxHealth() + playerBlood.getBlood() / 1000);
-                PlayerBloodPacket.BloodPacket msg = new PlayerBloodPacket.BloodPacket(playerBlood.getBlood(), playerBlood.getMaxBlood());
-                ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
-                JojoPacket.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayerEntity), msg);
+                JojoUtility.setBloodHearts(player, playerBlood);
+                JojoPacket.CHANNEL.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player), JojoUtility.bloodPacketMessage(playerBlood));
                 player.sendStatusMessage(new TextComponent() {
                     @Override
                     public String getUnformattedComponentText() {

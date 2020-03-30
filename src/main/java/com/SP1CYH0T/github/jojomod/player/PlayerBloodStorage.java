@@ -25,7 +25,4 @@ public class PlayerBloodStorage implements Capability.IStorage<IPlayerBlood> {
         instance.setBlood(nbt1.getFloat("storedBlood"));
         instance.setMaxBlood(nbt1.getFloat("maxBlood"));
     }
-
-    public void sync() {
-    }
 }

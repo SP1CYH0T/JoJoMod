@@ -43,9 +43,9 @@ public class JojoMod {
         modEventBus.addListener(JojoLootTable::onLootLoad);
         instance = this;
     }
+
     @SubscribeEvent
     public void onCommonSetup(FMLCommonSetupEvent e) {
-        CapabilityManager.INSTANCE.register(IPlayerBlood.class, new PlayerBloodStorage(), PlayerBlood::new);
         JojoPacket.CHANNEL = NetworkRegistry.newSimpleChannel(
                 new ResourceLocation(JojoMod.MODID, "main"),
                 () -> JojoPacket.PROTOCOL_VERSION,
