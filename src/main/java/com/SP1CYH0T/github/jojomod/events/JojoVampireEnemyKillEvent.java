@@ -3,20 +3,12 @@ package com.SP1CYH0T.github.jojomod.events;
 
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
 import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
-import com.SP1CYH0T.github.jojomod.utility.JojoPacket;
 import com.SP1CYH0T.github.jojomod.utility.JojoUtility;
-import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.server.STitlePacket;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponent;
-import net.minecraft.util.text.TextComponentUtils;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.fml.network.PacketDistributor;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
@@ -36,7 +28,7 @@ public class JojoVampireEnemyKillEvent {
                 playerBlood.adjustMaxBlood(maxBloodAdjustment);
                 JojoUtility.setBloodHearts(player, playerBlood);
                 ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
-                JojoPacket.CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayerEntity), JojoUtility.bloodPacketMessage(playerBlood));
+                playerBlood.sync(serverPlayerEntity);
                 /*serverPlayerEntity.connection.sendPacket(new STitlePacket(STitlePacket.Type.TITLE, new TextComponent() {
                         @Override
                         public String getUnformattedComponentText() {
@@ -48,17 +40,7 @@ public class JojoVampireEnemyKillEvent {
                         }
                     }));
                  */
-                player.sendStatusMessage(new TextComponent() {
-                    @Override
-                    public String getUnformattedComponentText() {
-                        return new TranslationTextComponent("vampire.blood_increase").getFormattedText().replaceAll("%BLOOD_ADJUSTMENT%", String.format("%.03f", bloodAdjustment));
-                    }
-
-                    @Override
-                    public ITextComponent shallowCopy() {
-                        return this;
-                    }
-                }, true);
+                JojoUtility.sendMessage(player, new TranslationTextComponent("vampire.blood_increase", String.format("%.03f", bloodAdjustment)), true);
                 //Will continue later ~Jayson
             }
         }

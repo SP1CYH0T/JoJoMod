@@ -13,16 +13,11 @@ public class PlayerBloodStorage implements Capability.IStorage<IPlayerBlood> {
     @Nullable
     @Override
     public INBT writeNBT(Capability<IPlayerBlood> capability, IPlayerBlood instance, Direction side) {
-        CompoundNBT nbt = new CompoundNBT();
-        nbt.putFloat("storedBlood", instance.getBlood());
-        nbt.putFloat("maxBlood", instance.getMaxBlood());
-        return nbt;
+        return instance.serializeNBT();
     }
 
     @Override
     public void readNBT(Capability<IPlayerBlood> capability, IPlayerBlood instance, Direction side, INBT nbt) {
-        CompoundNBT nbt1 = (CompoundNBT) nbt;
-        instance.setBlood(nbt1.getFloat("storedBlood"));
-        instance.setMaxBlood(nbt1.getFloat("maxBlood"));
+        instance.deserializeNBT((CompoundNBT) nbt);
     }
 }

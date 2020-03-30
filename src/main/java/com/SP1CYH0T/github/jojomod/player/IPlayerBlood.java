@@ -1,6 +1,10 @@
 package com.SP1CYH0T.github.jojomod.player;
 
-public interface IPlayerBlood {
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.common.util.INBTSerializable;
+
+public interface IPlayerBlood extends INBTSerializable<CompoundNBT> {
     float getBlood();
     float getMaxBlood();
 
@@ -16,4 +20,5 @@ public interface IPlayerBlood {
     float adjustBlood(float adjustment, boolean checkMax);
 
     float decreaseBlood(float decreasement, boolean checkMax);
+    void sync(PlayerEntity entity);
 }

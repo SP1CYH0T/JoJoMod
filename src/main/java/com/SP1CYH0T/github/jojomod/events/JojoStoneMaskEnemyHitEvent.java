@@ -1,6 +1,7 @@
 package com.SP1CYH0T.github.jojomod.events;
 
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
+import com.SP1CYH0T.github.jojomod.player.PlayerBlood;
 import com.SP1CYH0T.github.jojomod.registry.JojoSoundEvents;
 import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
 import com.SP1CYH0T.github.jojomod.utility.JojoUtility;
@@ -24,22 +25,22 @@ public class JojoStoneMaskEnemyHitEvent {
                 PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
                 if(JojoUtility.isWearingStoneMask(player)) {
                     JojoUtility.getHelmet(player).shrink(1);
-                    player.sendMessage(new TranslationTextComponent("stone_mask.break"));
-                    LazyOptional<IPlayerBlood> playerBloodLazyOptional = player.getCapability(JojoCapability.PLAYER_BLOOD);
-                    if(playerBloodLazyOptional.isPresent()) {
-                        IPlayerBlood playerBlood = playerBloodLazyOptional.orElse(null);
-                        if (!JojoUtility.isVampire(playerBlood)) {
+                    JojoUtility.sendMessage(player, new TranslationTextComponent("stone_mask.break"), false);
+
+                    PlayerBlood.get(player).ifPresent((data) -> {
+                        if (!JojoUtility.isVampire(data)) {
                             //player.playSound();
                             player.addPotionEffect(new EffectInstance(Effects.GLOWING, 1125));
                             player.addPotionEffect(new EffectInstance(Effects.REGENERATION, 1290));
                             player.addPotionEffect(new EffectInstance(Effects.HUNGER, 1150));
                             //player.addPotionEffect(new EffectInstance(Effects.HEALTH_BOOST, 1820, 5));
                             player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 355));
-                            playerBlood.adjustMaxBlood(1000f);
-                            playerBlood.adjustBlood(125f, true);
-                            JojoUtility.setBloodHearts(player, playerBlood);
+                            data.adjustMaxBlood(1000f);
+                            data.adjustBlood(125f, true);
+                            JojoUtility.setBloodHearts(player, data);
                         }
-                    }
+                    });
+
                 }
         }
 }
