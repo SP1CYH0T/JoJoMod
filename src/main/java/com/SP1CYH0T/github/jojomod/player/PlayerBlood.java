@@ -82,8 +82,10 @@ public class PlayerBlood implements IPlayerBlood{
 
     @Override
     public void sync(PlayerEntity entity) {
-        IPlayerBlood data = get(entity).orElse(null);
-        JojoNetwork.sendPacketToAll(new PlayerBloodPacket(entity.getUniqueID(), data.serializeNBT()));
+        if(!entity.getEntityWorld().isRemote()) {
+            IPlayerBlood data = get(entity).orElse(null);
+            JojoNetwork.sendPacketToAll(new PlayerBloodPacket(entity.getUniqueID(), data.serializeNBT()));
+        }
     }
 
     @Nonnull
