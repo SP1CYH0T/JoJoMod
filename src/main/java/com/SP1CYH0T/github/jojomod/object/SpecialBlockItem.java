@@ -1,4 +1,4 @@
-package com.SP1CYH0T.github.jojomod.objects;
+package com.SP1CYH0T.github.jojomod.object;
 
 import com.SP1CYH0T.github.jojomod.registry.JojoItemGroup;
 

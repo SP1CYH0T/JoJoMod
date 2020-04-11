@@ -1,20 +1,11 @@
-package com.SP1CYH0T.github.jojomod.events;
+package com.SP1CYH0T.github.jojomod.event;
 
-import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
 import com.SP1CYH0T.github.jojomod.player.PlayerBlood;
-import com.SP1CYH0T.github.jojomod.registry.JojoSoundEvents;
-import com.SP1CYH0T.github.jojomod.utility.JojoCapability;
 import com.SP1CYH0T.github.jojomod.utility.JojoUtility;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 

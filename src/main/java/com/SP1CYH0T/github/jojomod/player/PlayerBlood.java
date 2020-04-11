@@ -58,6 +58,16 @@ public class PlayerBlood implements IPlayerBlood{
        return this.decreaseBlood(decreasement, false);
     }
 
+    @Override
+    public void resetBlood() {
+        this.blood = 0;
+    }
+
+    @Override
+    public void resetMaxBlood() {
+        this.maxBlood = 0;
+    }
+
 
     @Override
     public float adjustBlood(float adjustment, boolean checkMax) {

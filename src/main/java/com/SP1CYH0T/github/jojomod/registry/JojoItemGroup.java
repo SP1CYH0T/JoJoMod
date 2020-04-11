@@ -1,6 +1,6 @@
 package com.SP1CYH0T.github.jojomod.registry;
 
-import com.SP1CYH0T.github.jojomod.objects.itemgroups.ItemGroupJojo;
+import com.SP1CYH0T.github.jojomod.object.itemgroup.ItemGroupJojo;
 import net.minecraft.item.ItemGroup;
 
 public enum JojoItemGroup {

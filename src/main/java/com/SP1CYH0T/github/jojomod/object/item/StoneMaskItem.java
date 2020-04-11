@@ -1,4 +1,4 @@
-package com.SP1CYH0T.github.jojomod.objects.items;
+package com.SP1CYH0T.github.jojomod.object.item;
 
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;

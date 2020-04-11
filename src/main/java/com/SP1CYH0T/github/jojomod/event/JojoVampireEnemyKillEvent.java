@@ -1,4 +1,4 @@
-package com.SP1CYH0T.github.jojomod.events;
+package com.SP1CYH0T.github.jojomod.event;
 
 
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;

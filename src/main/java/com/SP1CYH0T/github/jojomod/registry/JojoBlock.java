@@ -1,7 +1,7 @@
 package com.SP1CYH0T.github.jojomod.registry;
 
 import com.SP1CYH0T.github.jojomod.JojoMod;
-import com.SP1CYH0T.github.jojomod.objects.SpecialBlockItem;
+import com.SP1CYH0T.github.jojomod.object.SpecialBlockItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;

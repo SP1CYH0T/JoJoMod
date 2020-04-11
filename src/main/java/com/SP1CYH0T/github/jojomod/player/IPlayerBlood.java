@@ -17,6 +17,9 @@ public interface IPlayerBlood extends INBTSerializable<CompoundNBT> {
     float decreaseMaxBlood(float decreasement);
     float decreaseBlood(float decreasement);
 
+    void resetBlood();
+    void resetMaxBlood();
+
     float adjustBlood(float adjustment, boolean checkMax);
 
     float decreaseBlood(float decreasement, boolean checkMax);

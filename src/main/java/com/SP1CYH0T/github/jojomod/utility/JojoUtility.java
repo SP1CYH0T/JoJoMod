@@ -1,6 +1,6 @@
 package com.SP1CYH0T.github.jojomod.utility;
 
-import com.SP1CYH0T.github.jojomod.objects.items.StoneMaskItem;
+import com.SP1CYH0T.github.jojomod.object.item.StoneMaskItem;
 import com.SP1CYH0T.github.jojomod.player.IPlayerBlood;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
