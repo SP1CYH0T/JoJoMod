@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public interface IPlayerBlood extends INBTSerializable<CompoundNBT> {
+
     float getBlood();
     float getMaxBlood();
 
@@ -21,7 +22,8 @@ public interface IPlayerBlood extends INBTSerializable<CompoundNBT> {
     void resetMaxBlood();
 
     float adjustBlood(float adjustment, boolean checkMax);
-
     float decreaseBlood(float decreasement, boolean checkMax);
+
     void sync(PlayerEntity entity);
+
 }

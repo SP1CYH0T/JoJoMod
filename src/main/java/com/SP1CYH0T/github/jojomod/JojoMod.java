@@ -41,7 +41,7 @@ public class JojoMod {
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-        CommandDispatcher dispatcher = event.getCommandDispatcher();
+        CommandDispatcher dispatcher = event.getServer().getCommandManager().getDispatcher();
         BloodResetCommand.register(dispatcher);
     }
 

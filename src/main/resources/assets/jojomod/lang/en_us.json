@@ -4,6 +4,6 @@
   "vampire.blood_increase": "Blood Increased by %s",
   "vampire.max_blood_increase": "Max Blood Increased by %MAX_BLOOD_ADJUSTMENT%",
   "command_maxBlood_reset": "Max Blood resetted for Player: %s",
-  "command_blood_reset": "Blodo Resetted for Player: %s",
+  "command_blood_reset": "Blood Resetted for Player: %s",
   "vampire.blood_decrease": "Blood Decreased by %s"
 }

@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = JojoMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JojoLootTable {
+
     @SubscribeEvent
     public static void onLootLoad(LootTableLoadEvent event) {
         if(event.getName().toString().equals("minecraft:chests/jungle_pyramid")) {
